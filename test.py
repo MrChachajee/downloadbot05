@@ -50,7 +50,8 @@ except e.NoSuchElementException:
     print("Accept Button Not Found")
 sendDocument("test.png")
 try:
-    driver.find_element(By.PARTIAL_LINK_TEXT, "64-bit").click()
+    element = driver.find_element(By.PARTIAL_LINK_TEXT, "64-bit")
+    driver.execute_script("arguments[0].click();", element)
 except e.ElementClickInterceptedException:
     print(driver.current_url)
     driver.refresh()
