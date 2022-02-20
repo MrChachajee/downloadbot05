@@ -24,8 +24,8 @@ if platform == 'linux' or platform == 'linux2':
         'rm -rf -v !("bot.py"|"Procfile"|"requirements.txt"|"runtime.txt"|"test.py")')
 
 driver.get("https://www.whatsapp.com/download/")
-driver.find_element_by_xpath(
-    '//*[@id="content-wrapper"]/div/div/div/div/div/div/div[2]/div/div/div/div/div/a').click()
+driver.find_element('By.XPATH',
+                    '//*[@id="content-wrapper"]/div/div/div/div/div/div/div[2]/div/div/div/div/div/a').click()
 print("Download Button Clicked")
 
 dlwait = False
