@@ -52,7 +52,10 @@ sendDocument("test.png")
 try:
     driver.find_element(By.PARTIAL_LINK_TEXT, "64-bit").click()
 except e.ElementClickInterceptedException:
-    driver.find_element(By.PARTIAL_LINK_TEXT, "ACCEPT").click()
+    print(driver.current_url)
+    driver.refresh()
+    driver.find_element(By.PARTIAL_LINK_TEXT, "64-bit").click()
+
 print("Download Button Clicked")
 sendDocument("test.png")
 dlwait = False
