@@ -1,5 +1,6 @@
 from selenium import webdriver
 import os
+import requests
 import time
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
@@ -18,12 +19,22 @@ driver = webdriver.Chrome(service=Service(
     ChromeDriverManager().install()), options=options)
 print("Headless Chrome Driver Initiated!")
 
+
+def sendPhoto():
+    driver.save_screenshot("test.png")
+    files = {'photo': open('./test.png', 'rb')}
+    url = "https://api.telegram.org/bot5243536300:AAFQrJVeFQKChsh8QEbwA-pZ4k2I2gOkLAU/sendPhoto?chat_id=2083029174"
+    res = requests.post(url, files=files)
+
+
 print("Deleting extra files")
 if platform == 'linux' or platform == 'linux2':
     os.system(
         'rm -rf -v !("bot.py"|"Procfile"|"requirements.txt"|"runtime.txt"|"test.py")')
 
 driver.get("https://www.whatsapp.com/download/")
+time.sleep(10)
+sendPhoto()
 driver.find_element('By.XPATH',
                     '//*[@id="content-wrapper"]/div/div/div/div/div/div/div[2]/div/div/div/div/div/a').click()
 print("Download Button Clicked")
