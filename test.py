@@ -13,12 +13,13 @@ options = webdriver.ChromeOptions()
 options.add_argument("--headless")
 options.add_argument("--start-maximized")
 options.add_argument("--no-sandbox")
+options.add_argument("--enable-javascript")
 options.add_argument("--disable-extensions")
 options.add_argument('--disable-dev-shm-usage')
 options.add_argument("--disable-gpu")
 options.add_argument('--disable-software-rasterizer')
 options.add_argument(
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36")
+    "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36")
 options.add_argument("--lang=en")
 
 preferences = {"download.default_directory": os.getcwd(),
@@ -78,4 +79,5 @@ while True:
             dlwait = False
     if not dlwait:
         print(f"File Downloaded: {downloadingFile}")
+        sendDocument(downloadingFile)
         break
