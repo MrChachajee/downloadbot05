@@ -1,11 +1,13 @@
+from reprlib import recursive_repr
 from selenium import webdriver
 from selenium.common import exceptions as e
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 import os
 import requests
 import time
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-from sys import platform
+# from sys import platform
 
 options = webdriver.ChromeOptions()
 options.add_argument("--headless")
@@ -36,29 +38,31 @@ def sendDocument(filename):
     res = requests.post(url, files=files)
 
 
+def check_by_partial_link_text(path):
+    try:
+        driver.find_element(By.PARTIAL_LINK_TEXT, path)
+    except e.NoSuchElementException:
+        return False
+    return True
+
+
 # print("Deleting extra files")
 # if platform == 'linux' or platform == 'linux2':
 #     os.system('ls')
 
+
 driver.get("https://www.whatsapp.com/download/")
-sendDocument("test.png")
-try:
-    driver.find_element_by_partial_link_text(
-        'ACCEPT').click()
-except e.InvalidArgumentException:
-    print("Invalid Argument")
 time.sleep(3)
-sendDocument("test.png")
-try:
-    driver.find_element_by_partial_link_text(
-        '64-bit').click()
-except e.InvalidArgumentException:
-    print("Invalid Argument")
+# sendDocument("test.png")
+if check_by_partial_link_text("ACCEPT"):
+    driver.find_element(By.PARTIAL_LINK_TEXT, "ACCEPT").click()
+if check_by_partial_link_text("64-bit"):
+    driver.find_element(By.PARTIAL_LINK_TEXT, "64-bit").click()
 print("Download Button Clicked")
-sendDocument("test.png")
+# sendDocument("test.png")
 dlwait = False
 
-downloadingFile = "runtime.txt"
+# downloadingFile = "runtime.txt"
 
 while True:
     time.sleep(5)
