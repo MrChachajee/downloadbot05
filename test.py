@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.common import exceptions as e
 import os
 import requests
 import time
@@ -35,15 +36,17 @@ def sendDocument(filename):
     res = requests.post(url, files=files)
 
 
-print("Deleting extra files")
-if platform == 'linux' or platform == 'linux2':
-    os.system('ls')
+# print("Deleting extra files")
+# if platform == 'linux' or platform == 'linux2':
+#     os.system('ls')
 
 driver.get("https://www.whatsapp.com/download/")
-time.sleep(10)
 sendDocument("test.png")
-driver.find_element(
-    "By.LINK_TEXT", 'Windows 8 and higher (64-bit version)').click()
+try:
+    driver.find_element_by_partial_link_text(
+        '64-bit').click()
+except e.InvalidArgumentException:
+    print("Invalid Argument")
 print("Download Button Clicked")
 sendDocument("test.png")
 dlwait = False
