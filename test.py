@@ -44,12 +44,21 @@ driver.get("https://www.whatsapp.com/download/")
 sendDocument("test.png")
 try:
     driver.find_element_by_partial_link_text(
+        'ACCEPT').click()
+except e.InvalidArgumentException:
+    print("Invalid Argument")
+time.sleep(3)
+sendDocument("test.png")
+try:
+    driver.find_element_by_partial_link_text(
         '64-bit').click()
 except e.InvalidArgumentException:
     print("Invalid Argument")
 print("Download Button Clicked")
 sendDocument("test.png")
 dlwait = False
+
+downloadingFile = "runtime.txt"
 
 while True:
     time.sleep(5)
@@ -65,5 +74,4 @@ while True:
             dlwait = False
     if not dlwait:
         print(f"File Downloaded: {downloadingFile}")
-        sendDocument(downloadingFile)
         break
