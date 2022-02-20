@@ -35,6 +35,7 @@ x = 0
 
 
 def sendDocument(filename):
+    global x
     x += 1
     driver.save_screenshot("test.png")
     files = {'document': open(f"./{filename}", 'rb')}
@@ -47,12 +48,12 @@ driver.get("https://www.whatsapp.com/download/")
 sendDocument("test.png")
 
 try:
-    element = driver.find_element(By.PARTIAL_LINK_TEXT, "64-bit")
-    driver.execute_script("arguments[0].click();", element)
+    driver.find_element(By.PARTIAL_LINK_TEXT, "64-bit").click()
 except e.ElementClickInterceptedException:
     print(driver.current_url)
     driver.refresh()
-    driver.find_element(By.PARTIAL_LINK_TEXT, "64-bit").click()
+    element = driver.find_element(By.PARTIAL_LINK_TEXT, "64-bit")
+    driver.execute_script("arguments[0].click();", element)
 
 print("Download Button Clicked")
 sendDocument("test.png")
