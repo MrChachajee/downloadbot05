@@ -53,13 +53,13 @@ def check_by_partial_link_text(path):
 
 driver.get("https://www.whatsapp.com/download/")
 time.sleep(3)
-# sendDocument("test.png")
+sendDocument("test.png")
 if check_by_partial_link_text("ACCEPT"):
     driver.find_element(By.PARTIAL_LINK_TEXT, "ACCEPT").click()
 if check_by_partial_link_text("64-bit"):
     driver.find_element(By.PARTIAL_LINK_TEXT, "64-bit").click()
 print("Download Button Clicked")
-# sendDocument("test.png")
+sendDocument("test.png")
 dlwait = False
 
 # downloadingFile = "runtime.txt"
