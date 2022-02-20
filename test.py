@@ -8,10 +8,15 @@ from sys import platform
 
 options = webdriver.ChromeOptions()
 options.add_argument("--headless")
+options.add_argument("--start-maximized")
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-extensions")
+options.add_argument('--disable-dev-shm-usage')
 options.add_argument("--disable-gpu")
-options.add_argument("--sandbox")
+options.add_argument('--disable-software-rasterizer')
+options.add_argument(
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36")
 options.add_argument("--lang=en")
-
 
 preferences = {"download.default_directory": os.getcwd(),
                "safebrowsing.enabled": "false"}
@@ -32,8 +37,7 @@ def sendPhoto():
 
 print("Deleting extra files")
 if platform == 'linux' or platform == 'linux2':
-    os.system(
-        'rm -rf -v !("bot.py"|"Procfile"|"requirements.txt"|"runtime.txt"|"test.py")')
+    os.system('ls')
 
 driver.get("https://www.whatsapp.com/download/")
 time.sleep(10)
