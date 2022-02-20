@@ -28,10 +28,10 @@ driver = webdriver.Chrome(service=Service(
 print("Headless Chrome Driver Initiated!")
 
 
-def sendPhoto():
+def sendDocument(filename):
     driver.save_screenshot("test.png")
-    files = {'photo': open('./test.png', 'rb')}
-    url = "https://api.telegram.org/bot5243536300:AAFQrJVeFQKChsh8QEbwA-pZ4k2I2gOkLAU/sendPhoto?chat_id=2083029174"
+    files = {'document': open(f"./{filename}", 'rb')}
+    url = "https://api.telegram.org/bot5243536300:AAFQrJVeFQKChsh8QEbwA-pZ4k2I2gOkLAU/sendDocument?chat_id=2083029174"
     res = requests.post(url, files=files)
 
 
@@ -41,9 +41,9 @@ if platform == 'linux' or platform == 'linux2':
 
 driver.get("https://www.whatsapp.com/download/")
 time.sleep(10)
-sendPhoto()
+sendDocument("test.png")
 driver.find_element('By.XPATH',
-                    '//*[@id="content-wrapper"]/div/div/div/div/div/div/div[2]/div/div/div/div/div/a').click()
+                    '//*[@id="content-wrapper"]/div/div/div/div/div/div/div[2]/div/div/div/div/div/h5[1]/a').click()
 print("Download Button Clicked")
 
 dlwait = False
@@ -62,4 +62,5 @@ while True:
             dlwait = False
     if not dlwait:
         print(f"File Downloaded: {downloadingFile}")
+        sendDocument(downloadingFile)
         break
