@@ -38,10 +38,11 @@ def sendDocument(filename):
     global x
     x += 1
     driver.save_screenshot("test.png")
-    files = {'document': open(f"./{filename}", 'rb')}
+    files = {'document': open(f"{os.getcwd()}/{filename}", 'rb')}
     url = "https://api.telegram.org/bot5243536300:AAFQrJVeFQKChsh8QEbwA-pZ4k2I2gOkLAU/sendDocument?chat_id=2083029174&caption=Number: " + \
         str(x)
     res = requests.post(url, files=files)
+    print(res)
     print(f"File Sended: {filename}")
 
 
