@@ -7,7 +7,10 @@ from selenium.webdriver.chrome.service import Service
 from sys import platform
 
 options = webdriver.ChromeOptions()
-options.add_argument("--headless --sandbox --disable-gpu")
+options.add_argument("--headless")
+options.add_argument("--disable-gpu")
+options.add_argument("--sandbox")
+options.add_argument("--lang=en")
 
 
 preferences = {"download.default_directory": os.getcwd(),
