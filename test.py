@@ -42,10 +42,10 @@ if platform == 'linux' or platform == 'linux2':
 driver.get("https://www.whatsapp.com/download/")
 time.sleep(10)
 sendDocument("test.png")
-driver.find_element('By.XPATH',
-                    '//*[@id="content-wrapper"]/div/div/div/div/div/div/div[2]/div/div/div/div/div/h5[1]/a').click()
+driver.find_element(
+    "By.LINK_TEXT", 'Windows 8 and higher (64-bit version)').click()
 print("Download Button Clicked")
-
+sendDocument("test.png")
 dlwait = False
 
 while True:
